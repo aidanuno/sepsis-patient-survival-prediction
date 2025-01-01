@@ -9,22 +9,15 @@ from skl2onnx.common.data_types import FloatTensorType
 # load dataset 
 sepsis_survival_minimal_clinical_records: pd.DataFrame = fetch_ucirepo(id=827) 
 
+#undersample the data for hospital_outcome_1alive_0dead = 1, to make the data balanced:
+
+
 # Calculate the percentage of patients who died
 total_patients = len(sepsis_survival_minimal_clinical_records.data.original)
 patients_died = sepsis_survival_minimal_clinical_records.data.original['hospital_outcome_1alive_0dead'].value_counts()[0]
 percentage_died = (patients_died / total_patients) * 100
 
 print(f'Percentage of patients who died: {percentage_died:.2f}%')
-
-stats = {
-    'age' : {
-        'mean' : sepsis_survival_minimal_clinical_records.data.original['age_years'].mean(),
-        'median' : sepsis_survival_minimal_clinical_records.data.original['age_years'].median(),
-        'std' : sepsis_survival_minimal_clinical_records.data.original['age_years'].std(),
-        'min' : sepsis_survival_minimal_clinical_records.data.original['age_years'].min(),
-        'max' : sepsis_survival_minimal_clinical_records.data.original['age_years'].max(),
-    }
-}
 
 # Select features and target
 X = sepsis_survival_minimal_clinical_records.data.original[['age_years', 'sex_0male_1female', 'episode_number']]

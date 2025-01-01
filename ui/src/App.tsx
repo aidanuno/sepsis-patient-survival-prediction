@@ -77,6 +77,8 @@ function App() {
                 borderRadius={"2xl"}
                 padding={12}
                 alignItems={"start"}
+                minWidth={"lg"}
+
             >
                 <Button variant="surface">Predict survival</Button>
                 <Field label="Age">
@@ -103,7 +105,7 @@ function App() {
                         ))}
                     </HStack>
                 </RadioCardRoot>
-                <Code minWidth={"100%"}>{JSON.stringify(outcome)}</Code>
+                <Code minWidth={"100%"} width={"100%"}>{JSON.stringify(outcome)}</Code>
             </VStack>
         </Center>
     );
